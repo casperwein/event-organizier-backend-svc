@@ -1,0 +1,36 @@
+{
+  "name": "eo-sekar-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "db": "npx sequelize db:migrate",
+    "db:undo": "npx sequelize db:migrate:undo",
+    "db:undo:all": "npx sequelize db:migrate:undo:all",
+    "seed": "npx sequelize db:seed:all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.0.1",
+    "pg": "^8.11.3",
+    "qrcode-terminal": "^0.12.0",
+    "request": "^2.88.2",
+    "sequelize": "^6.32.1",
+    "whatsapp-web.js": "^1.22.1",
+    "winston": "^3.10.0",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.1"
+  }
+}
