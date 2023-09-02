@@ -3,6 +3,7 @@ const cors = require('cors')
 
 const userService = require("./router/UserRouter")
 const eventService = require("./router/EventRouter")
+const pesertaService = require("./router/PesertaRouter")
 
 const app = express()
 const port = process.env.PORT 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/user", userService)
 app.use("/event", eventService)
+app.use("/peserta", pesertaService)
 
 
 app.listen(port, () => console.log(`event-organizer:${port}`))
