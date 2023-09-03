@@ -1,10 +1,12 @@
 const Peserta = require("../models/index").peserta 
 const {response, resError, invalidRequestRespon} = require("../helper/response")
+const {generateQRCode} = require("./QrCodeController")
 
 const createPeserta = async(req, res) => {
     const data = {nama, telepon, email, alamat, los, event_id} = req.body;
 
     await Peserta.create(data).then(p => {
+        generateQRCode(p)
         response(201, "Success", p, res)
     }).catch(error => {
         console.log(error)

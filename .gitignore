@@ -3,3 +3,4 @@
 node_modules/
 public/
 .wwebjs_cache/
+log/
