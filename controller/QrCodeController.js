@@ -5,6 +5,7 @@ const crypto = require("crypto");
 const QRCode = require("../models/index").qrcode
 const {response, resError, invalidRequestRespon} = require("../helper/response")
 const {setLog} = require("./../helper/response");
+const {sentEmail} = require("./EmailController")
 
 const uuid = crypto.randomUUID()
 
@@ -16,7 +17,7 @@ const generateQRCode = async (data) => {
         const qrData = await qr.toDataURL(value, { width: 1000, height: 1000 });
     
         const fileName = 'public/qrcode/' +  uuid + ".png"
-        fs.writeFileSync(fileName, qrData.split(',')[1], 'base64');
+        await fs.writeFileSync(fileName, qrData.split(',')[1], 'base64');
         
         const dtSave = {
           peserta_id: data.id,
@@ -32,6 +33,15 @@ const generateQRCode = async (data) => {
           data, fileName
         }
         setLog("generate QR Code Berhasil!", lg)
+
+        const dataEmail = {
+          pathFile: fileName,
+          nama: data.nama,
+          email: data.email
+        }
+
+        sentEmail(dataEmail)
+
       } catch (err) {
         console.error('Terjadi kesalahan: ' + err.message);
         setLog("generate QR Code Gagal!", err.message)
@@ -46,6 +56,7 @@ const addQRCode = async(data) => {
       setLog("insert data qr code failed!", e)
     })
 }
+
 
 const getDataQRCode = async(req, res) => {
     await QRCode.findAll().then(q => {
