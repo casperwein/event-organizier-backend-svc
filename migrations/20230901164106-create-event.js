@@ -12,8 +12,23 @@ module.exports = {
       nama: {
         type: Sequelize.STRING
       },
-      tanggal: {
+      tempat: {
+        type: Sequelize.STRING
+      },
+      start_date: {
         type: Sequelize.DATE
+      },
+      end_date: {
+        type: Sequelize.DATE
+      },
+      lengthofevent: {
+        type: Sequelize.INTEGER
+      },
+      kapasitas: {
+        type: Sequelize.INTEGER
+      },
+      keterangan: {
+        type: Sequelize.STRING
       },
       eventpathfiledesc: {
         type: Sequelize.STRING
