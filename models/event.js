@@ -15,7 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   event.init({
     nama: DataTypes.STRING,
-    tanggal: DataTypes.DATE,
+    tempat: DataTypes.STRING,
+    start_date: DataTypes.DATE,
+    end_date: DataTypes.DATE,
+    lengthofevent: DataTypes.INTEGER,
+    kapasitas: DataTypes.INTEGER,
+    keterangan: DataTypes.DATE,
     eventpathfiledesc: DataTypes.STRING
   }, {
     sequelize,
