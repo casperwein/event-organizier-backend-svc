@@ -1,3 +1,5 @@
+const { Op } = require("sequelize");
+
 const Peserta = require("../models/index").peserta 
 const {response, resError, invalidRequestRespon} = require("../helper/response")
 const {generateQRCode} = require("./QrCodeController")
@@ -34,9 +36,29 @@ const getPesertaByEventId = async(req, res) => {
     })
 }
 
+const getPesertaByName = async(req, res) => {
+    const nama = req.params.nama
+    const id = req.params.id
+
+    await Peserta.findAll({
+        where: {
+            nama:{
+                [Op.like]: `%${nama}%`
+            }
+        }
+    }).then(p => {
+        console.log(p)
+        response(200, "Success", p, res)
+    }).catch(error => {
+        console.log(error)
+        resError(500, process.env.ISE, error, res)
+    })
+}
+
 
 module.exports = {
     createPeserta,
     getAllPeserta,
-    getPesertaByEventId
+    getPesertaByEventId,
+    getPesertaByName
 }
