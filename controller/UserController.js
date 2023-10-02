@@ -4,12 +4,12 @@ const {response, resError, invalidRequestRespon} = require("../helper/response")
 const { generateToken } = require("../helper/authentication");
 
 const registerUser = async(req, res) => {
-    let {nama,username, password, status, role, telepon} = req.body
+    let {nama, email, username, password, status, role, telepon} = req.body
 
     const hash = hashPassword(password);
 
     await User.create({
-        nama,username, password: hash, status, role, telepon
+        nama, email, username, password: hash, status, role, telepon
     }).then((dafpes) => {
         response(201, "Succes Create Data User", dafpes, res)
     }).catch(error => {
@@ -49,11 +49,11 @@ const getUserByID = async(req, res) => {
 }
 
 const userLogin = async(req, res) => {
-    const { username,  password } = req.body
+    const { email,  password } = req.body
 
-    await User.findOne({ where: { username } }).then(user => {
+    await User.findOne({ where: { email } }).then(user => {
         if (!user) {
-            const msg = "username tidak terdaftar!"
+            const msg = "email tidak terdaftar!"
             const status = "user not available"
             return invalidRequestRespon(401, msg, status, res )
         }
